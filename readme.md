@@ -78,3 +78,28 @@ Example:
 $ python markov_sampling.py 1.0u_4tasks_4max/1.xml m3k4.json 4 50000 1000 1 1 edf-uniform-sl1000-m3k4
 ```
 
+## 6. Case Study
+The code for the case study is in the `case_study/` directory. The sampling method is modified to match the non-preemptive scheduling policy. The `case_study/tasks/` directory includes the execution time that has been profiled from the ArduPilot execution. Usage:
+```bash
+$ cd case_study/
+$ python markov_sampling_case.py <m_k_json> <chain> <chain_length> <state_length> <output-file>
+```
+
+Parameters:
+- `m_k_json`: (str) The path to the (m,k) configuration file (provided `m1k1.json` and `m3k4.json`).
+- `chain`: (int) The number of chains to sample. We fix the number to be 4 in the paper.
+- `chain_length`: (int) The maximum number of length of the chain, even if the convergence criteria is not met. The sampling will be stopped once the criteria (R-hat score and T_{stab}) are met.
+- `state_length`: (int) The value of $\Delta$ in the paper.
+- `output-file`: (str) The file name of the output.
+
+Output:
+- A file with two columns: the first column is the task id, and the second column is the violation rate.
+- Mapping from task id to task names can be found [here](https://github.com/ArduPilot/ardupilot/blob/413452aa1aa6a178c13ba365f12776ec4f1a147f/Rover/Rover.cpp#L69). The priority of the task in this link is used as the task id.
+
+Example:
+```bash
+$ python markov_sampling_case.py ../m3k4.json 4 500000 200000 results-m3k4
+```
+
+Note: 
+- The process may be slow since the number of tasks is large for the case study.
