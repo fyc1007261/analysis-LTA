@@ -86,7 +86,7 @@ $ python markov_sampling_case.py <m_k_json> <chain> <chain_length> <state_length
 ```
 
 Parameters:
-- `m_k_json`: (str) The path to the (m,k) configuration file (provided `m1k1.json` and `m3k4.json`).
+- `m_k_json`: (str) The path to the (m,k) configuration file (jsons provided).
 - `chain`: (int) The number of chains to sample. We fix the number to be 4 in the paper.
 - `chain_length`: (int) The maximum number of length of the chain, even if the convergence criteria is not met. The sampling will be stopped once the criteria ($\hat{R}$ score and $T_{stab}$) are met.
 - `state_length`: (int) The value of $\Delta$ in the paper.
